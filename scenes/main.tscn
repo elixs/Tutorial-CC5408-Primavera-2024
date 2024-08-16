@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://6skmyivarvyc"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_7rm2a"]
+[ext_resource type="Texture2D" uid="uid://dmnqrd5gg55ux" path="res://icon.svg" id="1_8kufr"]
+[ext_resource type="PackedScene" uid="uid://bl6qqneqj5bei" path="res://scenes/ball.tscn" id="2_yeal0"]
+[ext_resource type="PackedScene" uid="uid://ce5jip1g0f8ma" path="res://scenes/player.tscn" id="3_o8448"]
+[ext_resource type="PackedScene" uid="uid://c57xfd6tvtm4v" path="res://scenes/enemy.tscn" id="5_57nwe"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4rou1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fc0bi"]
+radius = 68.7314
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_7rm2a")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(376, 573)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_4rou1")
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="."]
+position = Vector2(1498, 233)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D2"]
+shape = SubResource("CircleShape2D_fc0bi")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D2"]
+texture = ExtResource("1_8kufr")
+
+[node name="RigidBody2D3" parent="." instance=ExtResource("2_yeal0")]
+position = Vector2(-796, 160)
+
+[node name="RigidBody2D4" parent="." instance=ExtResource("2_yeal0")]
+position = Vector2(-1401, -85)
+
+[node name="Sprite2D" parent="RigidBody2D4" index="1"]
+modulate = Color(1, 0, 0, 1)
+
+[node name="Player" parent="." instance=ExtResource("3_o8448")]
+position = Vector2(289, 264)
+
+[node name="Enemy" parent="." instance=ExtResource("5_57nwe")]
+position = Vector2(965, 475)
+
+[editable path="RigidBody2D4"]

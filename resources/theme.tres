@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dlmd42cq5gkn1"]
+
+[ext_resource type="FontFile" uid="uid://d2r08pr7c5y2b" path="res://assets/fonts/Kaph/Kaph-Regular.woff2" id="1_7ipif"]
+[ext_resource type="FontFile" uid="uid://bqupuscbvt2ya" path="res://assets/fonts/m6x11plus.ttf" id="2_ldwwc"]
+
+[resource]
+default_font = ExtResource("2_ldwwc")
+default_font_size = 48
+Title/base_type = &"Label"
+Title/fonts/font = ExtResource("1_7ipif")
