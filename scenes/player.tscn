@@ -1,10 +1,14 @@
-[gd_scene load_steps=39 format=3 uid="uid://ce5jip1g0f8ma"]
+[gd_scene load_steps=43 format=3 uid="uid://ce5jip1g0f8ma"]
 
 [ext_resource type="Texture2D" uid="uid://xfmlf4rls8ap" path="res://assets/AnimationSheet_Character.png" id="1_hmi4s"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_sxs25"]
+[ext_resource type="PackedScene" uid="uid://bl6qqneqj5bei" path="res://scenes/ball.tscn" id="2_7mtyr"]
+[ext_resource type="Script" path="res://scenes/pivot.gd" id="2_52lfy"]
 [ext_resource type="Texture2D" uid="uid://dmnqrd5gg55ux" path="res://icon.svg" id="3_tgb4k"]
 [ext_resource type="Script" path="res://components/hitbox.gd" id="4_scd70"]
 [ext_resource type="Script" path="res://components/hurtbox.gd" id="5_y6v83"]
+[ext_resource type="AudioStream" uid="uid://bmjhl6vbymk6t" path="res://assets/sfx/Jump 1.wav" id="7_xs6hr"]
+[ext_resource type="PackedScene" uid="uid://dajqbc4fir4jp" path="res://ui/pause_menu.tscn" id="9_g0keb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j1om4"]
 radius = 25.0
@@ -294,6 +298,8 @@ graph_offset = Vector2(-77, -114)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_sxs25")
+ball_scene = ExtResource("2_7mtyr")
+jump_stream = ExtResource("7_xs6hr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 16)
@@ -305,6 +311,7 @@ libraries = {
 }
 
 [node name="Pivot" type="Node2D" parent="."]
+script = ExtResource("2_52lfy")
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
 scale = Vector2(4, 4)
@@ -312,10 +319,10 @@ texture = ExtResource("1_hmi4s")
 hframes = 8
 vframes = 9
 
-[node name="Marker2D" type="Marker2D" parent="Pivot"]
-position = Vector2(41, -15)
+[node name="BallSpawn" type="Marker2D" parent="Pivot"]
+position = Vector2(153, -191)
 
-[node name="Sprite2D" type="Sprite2D" parent="Pivot/Marker2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Pivot/BallSpawn"]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("3_tgb4k")
 
@@ -342,3 +349,18 @@ script = ExtResource("5_y6v83")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hurtbox"]
 polygon = PackedVector2Array(-1, -60, -1, -60, 48, -20, -48, -20)
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_xs6hr")
+bus = &"SFX"
+
+[node name="FireCooldown" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="AutoFireTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 5.0
+autostart = true
+
+[node name="PauseMenu" parent="." instance=ExtResource("9_g0keb")]

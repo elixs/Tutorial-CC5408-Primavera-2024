@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxvfdxhy7e0lq"]
+[gd_scene load_steps=5 format=3 uid="uid://dxvfdxhy7e0lq"]
 
 [ext_resource type="Script" path="res://ui/main_menu.gd" id="1_oobeg"]
 [ext_resource type="PackedScene" uid="uid://6skmyivarvyc" path="res://scenes/main.tscn" id="2_bdqgd"]
+[ext_resource type="Script" path="res://ui/beep_button.gd" id="3_141f3"]
+[ext_resource type="PackedScene" uid="uid://dbwdeo02yr10b" path="res://ui/beep_button.tscn" id="3_yd71b"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -33,20 +35,26 @@ layout_mode = 2
 theme_type_variation = &"Title"
 text = "Tutorial"
 
-[node name="Start" type="Button" parent="VBoxContainer"]
+[node name="Start" parent="VBoxContainer" instance=ExtResource("3_yd71b")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Start"
 
-[node name="Credits" type="Button" parent="VBoxContainer"]
+[node name="Credits" parent="VBoxContainer" instance=ExtResource("3_yd71b")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Credits"
 
-[node name="Quit" type="Button" parent="VBoxContainer"]
+[node name="Quit" parent="VBoxContainer" instance=ExtResource("3_yd71b")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Quit"
+
+[node name="BeepButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Beep
+"
+script = ExtResource("3_141f3")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1

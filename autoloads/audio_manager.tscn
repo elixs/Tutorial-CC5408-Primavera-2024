@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjtdcat7kee7w"]
+
+[ext_resource type="Script" path="res://autoloads/audio_manager.gd" id="1_0pndn"]
+[ext_resource type="AudioStream" uid="uid://bs4qlcq1mtiti" path="res://assets/sfx/Confirm 1.wav" id="2_sye05"]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_0pndn")
+beep = ExtResource("2_sye05")

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbwdeo02yr10b"]
+
+[ext_resource type="Script" path="res://ui/beep_button.gd" id="1_q4orr"]
+
+[node name="BeepButton" type="Button"]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_q4orr")
