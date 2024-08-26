@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfby4mufiic6f"]
+
+[ext_resource type="Script" path="res://autoloads/level_manager.gd" id="1_p2qgt"]
+[ext_resource type="PackedScene" uid="uid://dxvfdxhy7e0lq" path="res://ui/main_menu.tscn" id="2_57res"]
+[ext_resource type="PackedScene" uid="uid://d10cylsccfqjq" path="res://ui/credits.tscn" id="3_qplvt"]
+
+[node name="LevelManager" type="Node"]
+script = ExtResource("1_p2qgt")
+main_menu_scene = ExtResource("2_57res")
+credits_scene = ExtResource("3_qplvt")
