@@ -1,4 +1,4 @@
-class_name Player2
+class_name PlayerOld
 extends CharacterBody2D
 
 
@@ -12,7 +12,7 @@ extends CharacterBody2D
 
 @onready var sprite_2d: Sprite2D = $Pivot/Sprite2D
 @onready var animation_tree: AnimationTree = $AnimationTree
-@onready var playback = animation_tree.get("parameters/movement/playback")
+@onready var playback = animation_tree.get("parameters/playback")
 @onready var pivot: Node2D = $Pivot
 @onready var hitbox: Hitbox = $Pivot/Hitbox
 @onready var jump_sound: AudioStreamPlayer = $JumpSound
@@ -45,8 +45,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	if  is_on_floor() and Input.is_action_just_pressed("attack"):
-		animation_tree["parameters/attack/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
-		#attacking = true
+		playback.travel("attack")
+		attacking = true
 		return
 	
 	if Input.is_action_just_pressed("fire"):

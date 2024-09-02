@@ -12,7 +12,7 @@ extends CharacterBody2D
 
 @onready var sprite_2d: Sprite2D = $Pivot/Sprite2D
 @onready var animation_tree: AnimationTree = $AnimationTree
-@onready var playback = animation_tree.get("parameters/playback")
+@onready var playback = animation_tree.get("parameters/movement/playback")
 @onready var pivot: Node2D = $Pivot
 @onready var hitbox: Hitbox = $Pivot/Hitbox
 @onready var jump_sound: AudioStreamPlayer = $JumpSound
@@ -25,7 +25,6 @@ func _ready() -> void:
 	#sprite_2d.modulate = Color.BLUE
 	animation_tree.active = true
 	hitbox.damage_dealt.connect(_on_damage_dealt)
-	pivot.something_happend.connect(_on_something_happend)
 	auto_fire_timer.timeout.connect(fire)
 
 
@@ -38,26 +37,21 @@ func _physics_process(delta: float) -> void:
 		move_input = 0
 	velocity.x = move_toward(velocity.x, speed *  move_input, acceleration * delta)
 	
-	if is_on_floor() and Input.is_action_just_pressed("jump"):
+	if not attacking and is_on_floor() and Input.is_action_just_pressed("jump"):
 		velocity.y = -jump_speed
-		#jump_sound.play()
 		AudioManager.play_stream(jump_stream)
 	move_and_slide()
 	
-	if  is_on_floor() and Input.is_action_just_pressed("attack"):
-		playback.travel("attack")
-		attacking = true
+	if attacking:
 		return
 	
+	if is_on_floor() and Input.is_action_just_pressed("attack"):
+		animation_tree["parameters/attack/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 	if Input.is_action_just_pressed("fire"):
 		fire()
 	
 	if move_input != 0:
 		pivot.scale.x = sign(move_input)
-	
-	
-	if attacking:
-		return
 	
 	if is_on_floor():
 		if abs(velocity.x) > 10 or move_input:
@@ -81,10 +75,6 @@ func take_damage(damage: int):
 
 func _on_damage_dealt() -> void:
 	Debug.log("We made damage")
-
-
-func _on_something_happend(health, defense) -> void:
-	Debug.log("health: %d \ndefense: %d" % [health, defense])
 
 
 func fire() -> void:
