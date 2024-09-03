@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bl6qqneqj5bei" path="res://scenes/ball.tscn" id="2_g0xcq"]
 [ext_resource type="AudioStream" uid="uid://bmjhl6vbymk6t" path="res://assets/sfx/Jump 1.wav" id="3_ogeaw"]
 [ext_resource type="Script" path="res://scenes/pivot.gd" id="4_lnimg"]
-[ext_resource type="Texture2D" uid="uid://xfmlf4rls8ap" path="res://assets/AnimationSheet_Character.png" id="5_44jve"]
+[ext_resource type="Texture2D" uid="uid://xfmlf4rls8ap" path="res://assets/character/AnimationSheet_Character.png" id="5_44jve"]
 [ext_resource type="Texture2D" uid="uid://dmnqrd5gg55ux" path="res://icon.svg" id="6_if8oc"]
 [ext_resource type="Script" path="res://components/hitbox.gd" id="7_pmugn"]
 [ext_resource type="Script" path="res://components/hurtbox.gd" id="8_8qmhd"]
