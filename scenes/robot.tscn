@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://npg1j8punksh"]
+
+[ext_resource type="Texture2D" uid="uid://eoqigoudbb5r" path="res://assets/enemies/free-drones-pack-pixel-art/2 Character animations/3.png" id="1_qrf1u"]
+[ext_resource type="Script" path="res://scenes/robot.gd" id="1_xji18"]
+[ext_resource type="Script" path="res://components/hitbox.gd" id="2_ed1ym"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kgk7b"]
+radius = 21.0
+height = 96.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ikqc"]
+size = Vector2(76, 96)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3v6tc"]
+polygon = PackedVector2Array(-2, -81, -23, -39, -24, 45, 32, 47, 24, -38)
+
+[node name="Robot" type="CharacterBody2D"]
+script = ExtResource("1_xji18")
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Pivot"]
+scale = Vector2(4, 4)
+texture = ExtResource("1_qrf1u")
+offset = Vector2(10, -12)
+hframes = 8
+frame = 4
+
+[node name="RayCast2D" type="RayCast2D" parent="Pivot"]
+position = Vector2(32, 40)
+target_position = Vector2(0, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_kgk7b")
+
+[node name="Hitbox" type="Area2D" parent="."]
+script = ExtResource("2_ed1ym")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_6ikqc")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_3v6tc")

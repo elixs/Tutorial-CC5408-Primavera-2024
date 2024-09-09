@@ -31,6 +31,8 @@ func _ready() -> void:
 	hitbox.damage_dealt.connect(_on_damage_dealt)
 	auto_fire_timer.timeout.connect(fire)
 	blink_timer.timeout.connect(_on_blink_timeout)
+	Game.swapped.connect(_on_swapped)
+	_on_swapped(Game.is_swapped)
 
 
 func _physics_process(delta: float) -> void:
@@ -108,3 +110,10 @@ func _handle_running():
 		running = true
 	if Input.is_action_just_released("run"):
 		running = false
+
+func _on_swapped(value: bool) -> void:
+	#if value:
+		#modulate = Color.GREEN
+	#else:
+		#modulate = Color.BLUE
+	modulate = Color.GREEN if value else Color.BLUE

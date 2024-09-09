@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://q1lytobohlnx"]
+
+[ext_resource type="Script" path="res://scenes/drone.gd" id="1_2pj4f"]
+[ext_resource type="Texture2D" uid="uid://days7bt31hshx" path="res://assets/enemies/free-drones-pack-pixel-art/1 Drones/1/Idle.png" id="1_l5dq3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4nk8f"]
+radius = 42.0476
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_spune"]
+radius = 286.332
+
+[node name="Drone" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("1_2pj4f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_l5dq3")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4nk8f")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_spune")
