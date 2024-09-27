@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://gwpt1egmkvx1"]
+
+[ext_resource type="Script" path="res://ui/ui_item.gd" id="1_0ln27"]
+
+[node name="UIItem" type="HBoxContainer"]
+offset_right = 221.0
+offset_bottom = 48.0
+script = ExtResource("1_0ln27")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Item"
+
+[node name="Quantity" type="Label" parent="."]
+layout_mode = 2
+text = "x2"

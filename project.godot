@@ -21,6 +21,7 @@ Debug="*res://autoloads/debug.gd"
 AudioManager="*res://autoloads/audio_manager.tscn"
 LevelManager="*res://autoloads/level_manager.tscn"
 Game="*res://autoloads/game.gd"
+InventoryManager="*res://autoloads/inventory_manager.gd"
 
 [display]
 

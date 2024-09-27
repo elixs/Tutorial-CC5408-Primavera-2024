@@ -32,6 +32,21 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Resume"
 
+[node name="Retry" parent="VBoxContainer" instance=ExtResource("2_7h6lo")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Retry"
+
+[node name="Save" parent="VBoxContainer" instance=ExtResource("2_7h6lo")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save"
+
+[node name="Load" parent="VBoxContainer" instance=ExtResource("2_7h6lo")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load"
+
 [node name="Menu" parent="VBoxContainer" instance=ExtResource("2_7h6lo")]
 unique_name_in_owner = true
 layout_mode = 2

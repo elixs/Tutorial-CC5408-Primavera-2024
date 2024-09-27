@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://6skmyivarvyc"]
+[gd_scene load_steps=19 format=4 uid="uid://6skmyivarvyc"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_7rm2a"]
 [ext_resource type="Texture2D" uid="uid://dmnqrd5gg55ux" path="res://icon.svg" id="1_8kufr"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bdoual4jw5fhq" path="res://assets/background/Forest Tileset/4.png" id="11_srosi"]
 [ext_resource type="PackedScene" uid="uid://q1lytobohlnx" path="res://scenes/drone.tscn" id="12_i6t6c"]
 [ext_resource type="PackedScene" uid="uid://npg1j8punksh" path="res://scenes/robot.tscn" id="13_l1jer"]
+[ext_resource type="PackedScene" uid="uid://oouhnykoq6qo" path="res://scenes/pickable.tscn" id="14_isyxv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w2m6y"]
 texture = ExtResource("7_uq4jv")
@@ -491,12 +492,36 @@ bus = &"Music"
 position = Vector2(1020, 434)
 
 [node name="Player" parent="." instance=ExtResource("8_qgi58")]
-position = Vector2(1348, 333)
+position = Vector2(1342, 386)
 
 [node name="Drone" parent="." instance=ExtResource("12_i6t6c")]
 position = Vector2(847, 290)
 
 [node name="Robot" parent="." instance=ExtResource("13_l1jer")]
-position = Vector2(1670, 390)
+position = Vector2(2780, 374)
+
+[node name="Pickable" parent="." instance=ExtResource("14_isyxv")]
+position = Vector2(1649, 352)
+id = "gem"
+
+[node name="Pickable5" parent="." instance=ExtResource("14_isyxv")]
+position = Vector2(1681, 401)
+id = "gem"
+
+[node name="Pickable2" parent="." instance=ExtResource("14_isyxv")]
+position = Vector2(1775, 306)
+id = "gem"
+
+[node name="Pickable3" parent="." instance=ExtResource("14_isyxv")]
+position = Vector2(1608, 277)
+id = "gem"
+
+[node name="Pickable4" parent="." instance=ExtResource("14_isyxv")]
+position = Vector2(1528, 401)
+id = "gem"
+
+[node name="Pickable6" parent="." instance=ExtResource("14_isyxv")]
+position = Vector2(1541, 316)
+id = "gem"
 
 [editable path="RigidBody2D4"]

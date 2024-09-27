@@ -97,6 +97,10 @@ func fire() -> void:
 	fire_cooldown.start()
 
 
+func pickup(item: String):
+	Debug.log("I got a %s" % item)
+	InventoryManager.add_item(item)
+
 func _on_damage_dealt() -> void:
 	Debug.log("We made damage")
 

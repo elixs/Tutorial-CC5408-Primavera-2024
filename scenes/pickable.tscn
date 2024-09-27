@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://oouhnykoq6qo"]
+
+[ext_resource type="Script" path="res://scenes/pickable.gd" id="1_85lv6"]
+[ext_resource type="Texture2D" uid="uid://d2gscwjqtlhya" path="res://assets/tilesets/Nature Platformer Tileset [16x16][FREE] - RottingPixels/nature-paltformer-tileset-16x16.png" id="1_dfql2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cwdaa"]
+radius = 29.6142
+
+[node name="Pickable" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_85lv6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cwdaa")
+
+[node name="Nature-paltformer-tileset-16x16" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_dfql2")
+region_enabled = true
+region_rect = Rect2(80, 112, 16, 16)

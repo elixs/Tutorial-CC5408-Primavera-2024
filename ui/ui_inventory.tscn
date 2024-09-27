@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4rhkfpuqi2n0"]
+
+[ext_resource type="Script" path="res://ui/ui_inventory.gd" id="1_gmkhy"]
+[ext_resource type="PackedScene" uid="uid://gwpt1egmkvx1" path="res://ui/ui_item.tscn" id="2_awk4f"]
+
+[node name="UIInventory" type="CanvasLayer"]
+script = ExtResource("1_gmkhy")
+ui_item_scene = ExtResource("2_awk4f")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Inventory"
+
+[node name="ItemContainer" type="VBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
