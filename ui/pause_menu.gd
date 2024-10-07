@@ -42,6 +42,7 @@ func _on_menu_pressed() -> void:
 
 func _on_save_pressed() -> void:
 	InventoryManager.save_game()
+	Game.save_game()
 
 
 func _on_load_pressed() -> void:

@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://do58jo1gy4h6f"]
+
+[ext_resource type="PackedScene" uid="uid://chrunjpe2vc0j" path="res://scenes/kill_zone.tscn" id="1_bn5hx"]
+[ext_resource type="Script" path="res://scenes/restart_zone.gd" id="2_d8s63"]
+
+[node name="RestartZone" instance=ExtResource("1_bn5hx")]
+script = ExtResource("2_d8s63")

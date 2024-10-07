@@ -517,7 +517,6 @@ autostart = true
 offset = Vector2(0, -150)
 process_callback = 0
 limit_bottom = 684
-position_smoothing_enabled = true
 
 [node name="BlinkTimer" type="Timer" parent="."]
 wait_time = 3.0

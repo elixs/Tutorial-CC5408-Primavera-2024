@@ -13,3 +13,4 @@ display_name = "Sword"
 icon = SubResource("AtlasTexture_sbusq")
 durability = 23
 unlocked = true
+stack_size = 1

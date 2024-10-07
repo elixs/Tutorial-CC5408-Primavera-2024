@@ -23,6 +23,7 @@ var running := false
 @onready var fire_cooldown: Timer = $FireCooldown
 @onready var auto_fire_timer: Timer = $AutoFireTimer
 @onready var blink_timer: Timer = $BlinkTimer
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 
 
 func _ready() -> void:
@@ -100,6 +101,17 @@ func fire() -> void:
 func pickup(item: String):
 	Debug.log("I got a %s" % item)
 	InventoryManager.add_item(item)
+
+
+func die() -> void:
+	set_physics_process(false)
+	collision_shape_2d.disabled = true
+	var tween = create_tween()
+	tween.tween_property(self, "global_position", Game.last_checkpoint, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
+	await tween.finished
+	collision_shape_2d.disabled = false
+	set_physics_process(true)
+
 
 func _on_damage_dealt() -> void:
 	Debug.log("We made damage")

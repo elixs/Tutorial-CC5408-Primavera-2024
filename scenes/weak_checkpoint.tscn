@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://b108gt4ixjhgl"]
+
+[ext_resource type="PackedScene" uid="uid://cujxjpael2wim" path="res://scenes/checkpoint.tscn" id="1_468l6"]
+[ext_resource type="Script" path="res://scenes/weak_checkpoint.gd" id="2_ajggs"]
+
+[node name="WeakCheckpoint" instance=ExtResource("1_468l6")]
+script = ExtResource("2_ajggs")

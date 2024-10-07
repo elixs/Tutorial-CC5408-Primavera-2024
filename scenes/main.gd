@@ -6,14 +6,21 @@ extends Node2D
 @onready var parallax_2d_2: Parallax2D = $Parallax2D2
 @onready var parallax_2d: Parallax2D = $Parallax2D
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
-
+@onready var spawn_point: Marker2D = $SpawnPoint
+@onready var player: Player = $Player
 
 
 func _ready() -> void:
 	Game.swapped.connect(_on_swapped)
 	_on_swapped(Game.is_swapped)
+	if Game.valid_checkpoint:
+		player.global_position = Game.last_checkpoint
+	else:
+		Game.last_checkpoint = spawn_point.global_position
+		
 
-
+#func _exit_tree() -> void:
+	#Game.valid_checkpoint = false
 
 func _process(delta: float) -> void:
 	parallax_2d_2.scroll_offset.x += delta

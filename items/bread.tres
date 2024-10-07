@@ -13,3 +13,4 @@ display_name = "Bread"
 icon = SubResource("AtlasTexture_b3vy4")
 durability = 1
 unlocked = false
+stack_size = 16

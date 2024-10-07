@@ -5,3 +5,4 @@ extends Resource
 @export var icon: Texture
 @export var durability: int
 @export var unlocked: bool
+@export var stack_size: int = 1

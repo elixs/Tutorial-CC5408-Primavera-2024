@@ -13,3 +13,4 @@ display_name = "Gem"
 icon = SubResource("AtlasTexture_sbusq")
 durability = -1
 unlocked = true
+stack_size = 64
