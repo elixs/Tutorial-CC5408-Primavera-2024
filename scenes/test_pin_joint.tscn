@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://csyyhf0nq7036"]
+
+[ext_resource type="Script" path="res://scenes/test_pin_joint.gd" id="1_8qcui"]
+[ext_resource type="Texture2D" uid="uid://dmnqrd5gg55ux" path="res://icon.svg" id="1_mvue8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c00cm"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vkpvm"]
+size = Vector2(64, 64)
+
+[node name="TestPinJoint" type="Node2D"]
+script = ExtResource("1_8qcui")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(552, 294)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_c00cm")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("1_mvue8")
+
+[node name="DampedSpringJoint2D" type="DampedSpringJoint2D" parent="."]
+position = Vector2(566, 307)
+rotation = -1.59698
+node_a = NodePath("../StaticBody2D")
+node_b = NodePath("../RigidBody2D")
+length = 275.0
+rest_length = 55.0
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(916, 277)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("RectangleShape2D_vkpvm")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+texture = ExtResource("1_mvue8")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="RigidBody2D"]
+remote_path = NodePath("../../CharacterBody2D")
+update_rotation = false
+update_scale = false
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(916, 277)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_vkpvm")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+modulate = Color(1, 0, 1, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_mvue8")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true

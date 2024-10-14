@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://dyuawvibwyfau"]
+
+[ext_resource type="PackedScene" uid="uid://babiftkn1ed0o" path="res://scenes/player_3d.tscn" id="1_84cxs"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dr1o0"]
+size = Vector2(50, 50)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_4po7d"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jduts"]
+sky_top_color = Color(0.792441, 0.830283, 0.883143, 1)
+
+[sub_resource type="Sky" id="Sky_1yc22"]
+sky_material = SubResource("ProceduralSkyMaterial_jduts")
+
+[sub_resource type="Environment" id="Environment_i6j57"]
+background_mode = 2
+sky = SubResource("Sky_1yc22")
+
+[sub_resource type="SphereMesh" id="SphereMesh_stc3y"]
+
+[node name="Test3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_dr1o0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_4po7d")
+
+[node name="Player3D" parent="." instance=ExtResource("1_84cxs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.14718, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_i6j57")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.21089, 0, 0)
+mesh = SubResource("SphereMesh_stc3y")

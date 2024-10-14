@@ -11,6 +11,7 @@ func _ready() -> void:
 	add_child(canvas_layer)
 	canvas_layer.layer = 1000
 	canvas_layer.add_child(container)
+	container.mouse_filter =Control.MOUSE_FILTER_IGNORE
 
 
 func log(message: Variant, seconds: float = 2) -> void:
@@ -19,6 +20,7 @@ func log(message: Variant, seconds: float = 2) -> void:
 	else:
 		print_rich("[b]%s:[/b] " % (("Server") if multiplayer.is_server() else "Client"), message)
 	var label = Label.new()
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	label.text = str(message)
 	label.set("theme_override_constants/outline_size", 2)
 	label.set("theme_override_colors/font_outline_color", Color.BLACK)

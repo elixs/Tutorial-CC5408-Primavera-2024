@@ -1,67 +1,86 @@
-[gd_scene load_steps=2 format=3 uid="uid://botkfgw5thvmu"]
+[gd_scene load_steps=4 format=3 uid="uid://botkfgw5thvmu"]
 
 [ext_resource type="PackedScene" uid="uid://b502i64n3tu1m" path="res://ui/ui_slot.tscn" id="1_7ikm7"]
+[ext_resource type="Script" path="res://ui/inventory_screen.gd" id="1_66vrg"]
+[ext_resource type="PackedScene" uid="uid://7tg0f12elte0" path="res://ui/ui_dnd.tscn" id="3_n1ag4"]
 
-[node name="InventoryScreen" type="PanelContainer"]
-offset_left = 510.0
-offset_top = 288.0
-offset_right = 586.0
-offset_bottom = 364.0
+[node name="Inventory" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_66vrg")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = 6
 theme_override_constants/v_separation = 6
 columns = 5
 
-[node name="UISlot" parent="MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
+[node name="UISlot" parent="PanelContainer/MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
 layout_mode = 2
 
-[node name="UISlot2" parent="MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
+[node name="UISlot2" parent="PanelContainer/MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
 layout_mode = 2
 
-[node name="UISlot3" parent="MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
+[node name="UISlot3" parent="PanelContainer/MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
 layout_mode = 2
 
-[node name="UISlot4" parent="MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
+[node name="UISlot4" parent="PanelContainer/MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
 layout_mode = 2
 
-[node name="UISlot5" parent="MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
+[node name="UISlot5" parent="PanelContainer/MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
 layout_mode = 2
 
-[node name="UISlot6" parent="MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
+[node name="UISlot6" parent="PanelContainer/MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
 layout_mode = 2
 
-[node name="UISlot7" parent="MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
+[node name="UISlot7" parent="PanelContainer/MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
 layout_mode = 2
 
-[node name="UISlot8" parent="MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
+[node name="UISlot8" parent="PanelContainer/MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
 layout_mode = 2
 
-[node name="UISlot9" parent="MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
+[node name="UISlot9" parent="PanelContainer/MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
 layout_mode = 2
 
-[node name="UISlot10" parent="MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
+[node name="UISlot10" parent="PanelContainer/MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
 layout_mode = 2
 
-[node name="UISlot11" parent="MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
+[node name="UISlot11" parent="PanelContainer/MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
 layout_mode = 2
 
-[node name="UISlot12" parent="MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
+[node name="UISlot12" parent="PanelContainer/MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
 layout_mode = 2
 
-[node name="UISlot13" parent="MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
+[node name="UISlot13" parent="PanelContainer/MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
 layout_mode = 2
 
-[node name="UISlot14" parent="MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
+[node name="UISlot14" parent="PanelContainer/MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
 layout_mode = 2
 
-[node name="UISlot15" parent="MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
+[node name="UISlot15" parent="PanelContainer/MarginContainer/GridContainer" instance=ExtResource("1_7ikm7")]
 layout_mode = 2
+
+[node name="Control" type="Control" parent="PanelContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="UIDnD" parent="PanelContainer/Control" instance=ExtResource("3_n1ag4")]
+unique_name_in_owner = true
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

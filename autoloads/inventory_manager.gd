@@ -2,15 +2,22 @@ extends Node
 
 signal inventory_changed()
 
-# {item: {quantity: 0}}
+# {slot: {item: "", quantity: 0}}
 var items = {
-	"sword":
+	"0":
 	{
+		"item": "sword",
 		"quantity": 1
 	},
-	"bread":
+	"9":
 	{
+		"item": "bread",
 		"quantity": 5
+	},
+	"12":
+	{
+		"item": "bread",
+		"quantity": 2
 	},
 }
 
