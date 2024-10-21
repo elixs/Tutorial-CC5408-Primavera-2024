@@ -13,16 +13,14 @@ signal clicked
 func _ready() -> void:
 	gui_input.connect(_on_gui_input)
 	InventoryManager.slot_changed.connect(_on_slot_changed)
-	texture_rect.hide()
-	label.hide()
+	hide_content()
 	_update()
-	# set color to empty
-	#add_theme_color_override("bg_color", full_color)
 
 
 func hide_content() -> void:
 	texture_rect.hide()
 	label.hide()
+	get_theme_stylebox("panel").bg_color = empty_color
 
 
 func show_content() -> void:
@@ -40,7 +38,7 @@ func _on_slot_changed(slot_index: int) -> void:
 		_update()
 
 
-func _update() -> void:
+func _update() -> void:	
 	var slot_data = InventoryManager.get_slot(get_index())
 	if not slot_data:
 		hide_content()
@@ -50,3 +48,6 @@ func _update() -> void:
 	texture_rect.show()
 	label.text = str(slot_data.quantity)
 	label.visible = slot_data.quantity > 1
+	get_theme_stylebox("panel").bg_color = full_color
+	
+	
