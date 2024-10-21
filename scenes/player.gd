@@ -24,6 +24,8 @@ var running := false
 @onready var auto_fire_timer: Timer = $AutoFireTimer
 @onready var blink_timer: Timer = $BlinkTimer
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var inventory: MarginContainer = %Inventory
+@onready var death_particles: GPUParticles2D = $DeathParticles
 
 
 func _ready() -> void:
@@ -34,7 +36,12 @@ func _ready() -> void:
 	blink_timer.timeout.connect(_on_blink_timeout)
 	Game.swapped.connect(_on_swapped)
 	_on_swapped(Game.is_swapped)
+	inventory.hide()
 
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("inventory"):
+		inventory.visible = not inventory.visible
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -98,14 +105,16 @@ func fire() -> void:
 	fire_cooldown.start()
 
 
-func pickup(item: String):
-	Debug.log("I got a %s" % item)
-	#InventoryManager.add_item(item)
+func pickup(item: String) -> bool:
+	return InventoryManager.add_item(item, 1)
 
 
 func die() -> void:
 	set_physics_process(false)
 	collision_shape_2d.disabled = true
+	death_particles.emitting = true
+	await death_particles.finished
+	await get_tree().create_timer(0.5).timeout
 	var tween = create_tween()
 	tween.tween_property(self, "global_position", Game.last_checkpoint, 1).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	await tween.finished
@@ -132,4 +141,4 @@ func _on_swapped(value: bool) -> void:
 		#modulate = Color.GREEN
 	#else:
 		#modulate = Color.BLUE
-	modulate = Color.GREEN if value else Color.BLUE
+	sprite_2d.modulate = Color.GREEN if value else Color.BLUE

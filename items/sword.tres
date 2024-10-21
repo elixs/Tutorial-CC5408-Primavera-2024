@@ -9,6 +9,7 @@ region = Rect2(48, 96, 16, 16)
 
 [resource]
 script = ExtResource("1_jq8jm")
+name = "sword"
 display_name = "Sword"
 icon = SubResource("AtlasTexture_sbusq")
 durability = 23

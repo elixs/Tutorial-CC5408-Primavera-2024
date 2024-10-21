@@ -38,7 +38,7 @@ func _on_slot_changed(slot_index: int) -> void:
 		_update()
 
 
-func _update() -> void:	
+func _update() -> void:
 	var slot_data = InventoryManager.get_slot(get_index())
 	if not slot_data:
 		hide_content()
@@ -49,5 +49,3 @@ func _update() -> void:
 	label.text = str(slot_data.quantity)
 	label.visible = slot_data.quantity > 1
 	get_theme_stylebox("panel").bg_color = full_color
-	
-	

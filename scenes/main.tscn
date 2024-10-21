@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://6skmyivarvyc"]
+[gd_scene load_steps=29 format=4 uid="uid://6skmyivarvyc"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_7rm2a"]
 [ext_resource type="Texture2D" uid="uid://dmnqrd5gg55ux" path="res://icon.svg" id="1_8kufr"]
@@ -14,10 +14,13 @@
 [ext_resource type="PackedScene" uid="uid://q1lytobohlnx" path="res://scenes/drone.tscn" id="12_i6t6c"]
 [ext_resource type="PackedScene" uid="uid://npg1j8punksh" path="res://scenes/robot.tscn" id="13_l1jer"]
 [ext_resource type="PackedScene" uid="uid://oouhnykoq6qo" path="res://scenes/pickable.tscn" id="14_isyxv"]
+[ext_resource type="Resource" uid="uid://cdcgcxym8gved" path="res://items/gem.tres" id="15_3atir"]
 [ext_resource type="PackedScene" uid="uid://cujxjpael2wim" path="res://scenes/checkpoint.tscn" id="15_ahykb"]
+[ext_resource type="Resource" uid="uid://s5rs1ikyu2kr" path="res://items/bread.tres" id="15_cnl1f"]
 [ext_resource type="PackedScene" uid="uid://chrunjpe2vc0j" path="res://scenes/kill_zone.tscn" id="16_cpvld"]
 [ext_resource type="PackedScene" uid="uid://do58jo1gy4h6f" path="res://scenes/restart_zone.tscn" id="17_bnxk2"]
 [ext_resource type="PackedScene" uid="uid://b108gt4ixjhgl" path="res://scenes/weak_checkpoint.tscn" id="18_ga6as"]
+[ext_resource type="Resource" uid="uid://b6e4dnh4ltwxp" path="res://items/sword.tres" id="20_afl5t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w2m6y"]
 texture = ExtResource("7_uq4jv")
@@ -505,37 +508,13 @@ bus = &"Music"
 position = Vector2(226, 361)
 
 [node name="Player" parent="." instance=ExtResource("8_qgi58")]
-position = Vector2(1412, 369)
+position = Vector2(1601, 353)
 
 [node name="Drone" parent="." instance=ExtResource("12_i6t6c")]
 position = Vector2(109, 93)
 
 [node name="Robot" parent="." instance=ExtResource("13_l1jer")]
 position = Vector2(5287, 267)
-
-[node name="Pickable" parent="." instance=ExtResource("14_isyxv")]
-position = Vector2(1683, 93)
-id = "gem"
-
-[node name="Pickable5" parent="." instance=ExtResource("14_isyxv")]
-position = Vector2(1589, 254)
-id = "gem"
-
-[node name="Pickable2" parent="." instance=ExtResource("14_isyxv")]
-position = Vector2(1771, 183)
-id = "gem"
-
-[node name="Pickable3" parent="." instance=ExtResource("14_isyxv")]
-position = Vector2(1544, 65)
-id = "gem"
-
-[node name="Pickable4" parent="." instance=ExtResource("14_isyxv")]
-position = Vector2(1507, 263)
-id = "gem"
-
-[node name="Pickable6" parent="." instance=ExtResource("14_isyxv")]
-position = Vector2(1450, 148)
-id = "gem"
 
 [node name="Checkpoint" parent="." node_paths=PackedStringArray("respawn_point") instance=ExtResource("15_ahykb")]
 position = Vector2(2041, 392)
@@ -574,6 +553,7 @@ gizmo_extents = 47.5
 position = Vector2(6107, 841)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
+position = Vector2(69, 62)
 shape = SubResource("RectangleShape2D_6d288")
 
 [node name="SpawnPoint" type="Marker2D" parent="."]
@@ -602,5 +582,41 @@ shape = SubResource("RectangleShape2D_wjtwp")
 [node name="Marker2D3" type="Marker2D" parent="."]
 position = Vector2(1558, -62)
 gizmo_extents = 172.3
+
+[node name="Pickable" parent="." instance=ExtResource("14_isyxv")]
+position = Vector2(1642, 293)
+item = ExtResource("15_cnl1f")
+
+[node name="Pickable2" parent="." instance=ExtResource("14_isyxv")]
+position = Vector2(1592, 385)
+item = ExtResource("20_afl5t")
+
+[node name="Pickable3" parent="." instance=ExtResource("14_isyxv")]
+position = Vector2(1681, 360)
+item = ExtResource("20_afl5t")
+
+[node name="Pickable4" parent="." instance=ExtResource("14_isyxv")]
+position = Vector2(1756, 285)
+item = ExtResource("20_afl5t")
+
+[node name="Pickable5" parent="." instance=ExtResource("14_isyxv")]
+position = Vector2(1548, 213)
+item = ExtResource("15_3atir")
+
+[node name="Pickable6" parent="." instance=ExtResource("14_isyxv")]
+position = Vector2(1629, 225)
+item = ExtResource("15_3atir")
+
+[node name="Pickable7" parent="." instance=ExtResource("14_isyxv")]
+position = Vector2(1715, 211)
+item = ExtResource("15_3atir")
+
+[node name="Pickable8" parent="." instance=ExtResource("14_isyxv")]
+position = Vector2(1839, 214)
+item = ExtResource("15_3atir")
+
+[node name="Pickable9" parent="." instance=ExtResource("14_isyxv")]
+position = Vector2(1832, 318)
+item = ExtResource("15_3atir")
 
 [editable path="RigidBody2D4"]

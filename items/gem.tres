@@ -9,6 +9,7 @@ region = Rect2(80, 112, 16, 16)
 
 [resource]
 script = ExtResource("2_ghui5")
+name = "gem"
 display_name = "Gem"
 icon = SubResource("AtlasTexture_sbusq")
 durability = -1

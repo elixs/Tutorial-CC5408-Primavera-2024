@@ -18,10 +18,12 @@ func _process(delta: float) -> void:
 
 func _on_slot_clicked(clicked_slot: UISlot) -> void:
 	if not dnd_slot:
-		clicked_slot.hide_content()
-		dnd_slot = clicked_slot
-		ui_dnd.slot_index = dnd_slot.get_index()
-		ui_dnd.show()
+		var slot_data = InventoryManager.get_slot(clicked_slot.get_index())
+		if slot_data:
+			clicked_slot.hide_content()
+			dnd_slot = clicked_slot
+			ui_dnd.slot_index = dnd_slot.get_index()
+			ui_dnd.show()
 	else:
 		InventoryManager.move_item(dnd_slot.get_index(), clicked_slot.get_index())
 		var dnd_slot_data = InventoryManager.get_slot(dnd_slot.get_index())

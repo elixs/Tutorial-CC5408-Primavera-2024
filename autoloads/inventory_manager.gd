@@ -21,21 +21,44 @@ func _ready() -> void:
 
 
 func get_data(item: String) -> Item:
-	Slot
 	if item in data:
 		return data[item]
 	return null
 
 
-func get_slot(slot_index) -> Slot:
+func get_slot(slot_index: int) -> Slot:
 	for slot in slots:
 		if slot.index == slot_index:
 			return slot
 	return null
 
 
-func add_item(item: String, quantity: int) -> void:
-	pass
+func add_item(item: String, quantity: int) -> bool:
+	for slot in slots:
+		if slot.item == item:
+			# there is a slot with the same item
+			var item_data = get_data(item)
+			if slot.quantity == item_data.stack_size:
+				continue
+			var total = slot.quantity + quantity
+			if total <= item_data.stack_size:
+				slot.quantity = total
+				slot_changed.emit(slot.index)
+				return true
+			else:
+				slot.quantity = item_data.stack_size
+				slot_changed.emit(slot.index)
+				return add_item(item, total - item_data.stack_size)
+	# no slot with the same item
+	var index = _get_available_slot_index()
+	if index >= 0:
+		# there is a slot available
+		slots.push_back(Slot.new(index, item, quantity))
+		slot_changed.emit(index)
+		return true
+	else:
+		# nothing happens
+		return false
 
 
 func remove_item(slot_index: int) -> void:
@@ -121,8 +144,11 @@ func load_game() -> void:
 	inventory_changed.emit()
 	for i in max_size:
 		slot_changed.emit(i)
-	
-	
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("test"):
-		load_game()
+
+
+func _get_available_slot_index() -> int:
+	for i in max_size:
+		var slot = get_slot(i)
+		if not slot:
+			return i
+	return -1

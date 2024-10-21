@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://b8kr5tc47tw8k"]
+[gd_scene load_steps=60 format=3 uid="uid://b8kr5tc47tw8k"]
 
 [ext_resource type="Texture2D" uid="uid://xfmlf4rls8ap" path="res://assets/character/AnimationSheet_Character.png" id="1_hmi4s"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_qhhe5"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://components/hurtbox.gd" id="5_y6v83"]
 [ext_resource type="AudioStream" uid="uid://bmjhl6vbymk6t" path="res://assets/sfx/Jump 1.wav" id="7_xs6hr"]
 [ext_resource type="PackedScene" uid="uid://dajqbc4fir4jp" path="res://ui/pause_menu.tscn" id="9_g0keb"]
+[ext_resource type="PackedScene" uid="uid://botkfgw5thvmu" path="res://ui/inventory_screen.tscn" id="9_soqhy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j1om4"]
 radius = 25.0
@@ -433,6 +434,26 @@ nodes/movement/position = Vector2(-224, 224)
 nodes/output/position = Vector2(400, 192)
 node_connections = [&"attack", 0, &"movement", &"attack", 1, &"Animation 3", &"output", 0, &"attack"]
 
+[sub_resource type="Curve" id="Curve_pynlq"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_pbccs"]
+curve = SubResource("Curve_pynlq")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_isue7"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 16.654
+initial_velocity_min = 343.94
+initial_velocity_max = 468.94
+gravity = Vector3(0, 500, 0)
+scale_max = 8.58
+color = Color(1, 0, 0, 1)
+alpha_curve = SubResource("CurveTexture_pbccs")
+hue_variation_min = -0.07
+hue_variation_max = 0.09
+
 [node name="Player" type="CharacterBody2D" groups=["swap"]]
 collision_layer = 3
 collision_mask = 3
@@ -510,8 +531,6 @@ process_callback = 0
 wait_time = 5.0
 autostart = true
 
-[node name="PauseMenu" parent="." instance=ExtResource("9_g0keb")]
-
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(0, -150)
 process_callback = 0
@@ -520,3 +539,20 @@ limit_bottom = 684
 [node name="BlinkTimer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Inventory" parent="CanvasLayer" instance=ExtResource("9_soqhy")]
+unique_name_in_owner = true
+metadata/_edit_use_anchors_ = true
+
+[node name="PauseMenu" parent="." instance=ExtResource("9_g0keb")]
+
+[node name="DeathParticles" type="GPUParticles2D" parent="."]
+position = Vector2(0, -32)
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_isue7")
+one_shot = true
+explosiveness = 1.0
+visibility_rect = Rect2(-200, -200, 400, 400)

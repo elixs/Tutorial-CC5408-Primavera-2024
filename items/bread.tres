@@ -9,6 +9,7 @@ region = Rect2(16, 128, 16, 16)
 
 [resource]
 script = ExtResource("1_owhn1")
+name = "bread"
 display_name = "Bread"
 icon = SubResource("AtlasTexture_b3vy4")
 durability = 1
