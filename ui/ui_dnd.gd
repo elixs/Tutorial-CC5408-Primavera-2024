@@ -1,20 +1,22 @@
+class_name UIDnD
 extends Control
 
-var item: String
-var quantity: int
 
-@onready var texture_rect: TextureRect = $MarginContainer/TextureRect
-@onready var label: Label = $Label
+var slot_index: int:
+	set(value):
+		slot_index = value
+		update()
 
-func _ready() -> void:
-	label.hide()
+@onready var texture_rect: TextureRect = %TextureRect
+@onready var label: Label = %Label
 
-func set_item(item: String, quantity: int) ->  void:
-	var data = InventoryManager.get_data(item)
-	texture_rect.texture = data.icon
-	label.text = str(quantity)
+
+func update() -> void:
+	var slot_data = InventoryManager.get_slot(slot_index)
+	if not slot_data:
+		return
+	var item_data = InventoryManager.get_data(slot_data.item)
+	texture_rect.texture = item_data.icon
 	texture_rect.show()
-	self.item = item
-	self.quantity = quantity
-	if quantity > 1:
-		label.show()
+	label.text = str(slot_data.quantity)
+	label.visible = slot_data.quantity > 1

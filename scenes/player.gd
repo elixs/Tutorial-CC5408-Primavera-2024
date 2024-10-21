@@ -100,7 +100,7 @@ func fire() -> void:
 
 func pickup(item: String):
 	Debug.log("I got a %s" % item)
-	InventoryManager.add_item(item)
+	#InventoryManager.add_item(item)
 
 
 func die() -> void:

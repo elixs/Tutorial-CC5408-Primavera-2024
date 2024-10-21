@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://b8kr5tc47tw8k"]
+[gd_scene load_steps=56 format=3 uid="uid://b8kr5tc47tw8k"]
 
 [ext_resource type="Texture2D" uid="uid://xfmlf4rls8ap" path="res://assets/character/AnimationSheet_Character.png" id="1_hmi4s"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_qhhe5"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://bp755n2as6isu" path="res://assets/sprites/light.png" id="5_g66tu"]
 [ext_resource type="Script" path="res://components/hurtbox.gd" id="5_y6v83"]
 [ext_resource type="AudioStream" uid="uid://bmjhl6vbymk6t" path="res://assets/sfx/Jump 1.wav" id="7_xs6hr"]
-[ext_resource type="PackedScene" uid="uid://b4rhkfpuqi2n0" path="res://ui/ui_inventory.tscn" id="9_d7y04"]
 [ext_resource type="PackedScene" uid="uid://dajqbc4fir4jp" path="res://ui/pause_menu.tscn" id="9_g0keb"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j1om4"]
@@ -521,5 +520,3 @@ limit_bottom = 684
 [node name="BlinkTimer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
-
-[node name="UIInventory" parent="." instance=ExtResource("9_d7y04")]

@@ -1,44 +1,82 @@
 extends Node
 
 signal inventory_changed()
+signal slot_changed(slot_index: int)
 
-# {slot: {item: "", quantity: 0}}
-var items = {
-	"0":
-	{
-		"item": "sword",
-		"quantity": 1
-	},
-	"9":
-	{
-		"item": "bread",
-		"quantity": 5
-	},
-	"12":
-	{
-		"item": "bread",
-		"quantity": 2
-	},
-}
+var slots: Array[Slot] = [
+	Slot.new(0, "sword", 1),
+	Slot.new(9, "bread", 5),
+	Slot.new(12, "bread", 12),
+]
+var max_size := 15
 
 # { id: Item }
 var data := {}
+var data_path := "res://items"
 
-var data_path = "res://items"
+
 
 func _ready() -> void:
 	load_data()
 
 
 func get_data(item: String) -> Item:
+	Slot
 	if item in data:
 		return data[item]
 	return null
 
-func get_item(item: String) -> Dictionary:
-	if item in items:
-		return items[item]
-	return {}
+
+func get_slot(slot_index) -> Slot:
+	for slot in slots:
+		if slot.index == slot_index:
+			return slot
+	return null
+
+
+func add_item(item: String, quantity: int) -> void:
+	pass
+
+
+func remove_item(slot_index: int) -> void:
+	for slot in slots:
+		if slot.index == slot_index:
+			slots.erase(slot)
+			return
+
+
+func move_item(from_slot_index: int, to_slot_index: int) -> void:
+	if from_slot_index == to_slot_index:
+		return
+	var from_slot = get_slot(from_slot_index)
+	var to_slot = get_slot(to_slot_index)
+	if not from_slot:
+		# nothing to move
+		return
+	if not to_slot:
+		# move to empty slot
+		from_slot.index = to_slot_index
+	else:
+		if from_slot.item == to_slot.item:
+			# same item on both slots
+			var item_data = get_data(from_slot.item)
+			var total = from_slot.quantity + to_slot.quantity
+			if total <= item_data.stack_size:
+				to_slot.quantity = total
+				remove_item(from_slot_index)
+			else:
+				to_slot.quantity = item_data.stack_size
+				from_slot.quantity = total - item_data.stack_size
+		else:
+			# swap items
+			from_slot.index = to_slot_index
+			to_slot.index = from_slot_index
+			slot_changed.emit(from_slot_index)
+			slot_changed.emit(to_slot_index)
+	
+	slot_changed.emit(from_slot_index)
+	slot_changed.emit(to_slot_index)
+
 
 func load_data():
 	var dir = DirAccess.open(data_path)
@@ -54,33 +92,37 @@ func load_data():
 	else:
 		print("An error occurred when trying to access the path.")
 
-func add_item(item: String) -> void:
-	if item in items:
-		items[item].quantity += 1
-	else:
-		items[item] = {"quantity": 1}
-	inventory_changed.emit()
-
 
 func save_game() -> void:
-	var data = JSON.stringify(items)
+	var slot_data: Array[Dictionary] = []
+	for slot in slots:
+		slot_data.push_back(slot.to_dict())
+	var data = JSON.stringify(slot_data)
 	var file = FileAccess.open_encrypted_with_pass("user://inventory.data", FileAccess.WRITE, "1234")
 	file.store_string(data)
 	file.close()
-	
-	# Create new ConfigFile object.
-	var config = ConfigFile.new()
-
-	config.set_value("Display", "font_size", 24)
-	config.set_value("Display", "brightness", 0.7)
-	config.set_value("Settings", "language", "es")
-
-	config.save("user://scores.cfg")
+	#
+	## Create new ConfigFile object.
+	#var config = ConfigFile.new()
+#
+	#config.set_value("Display", "font_size", 24)
+	#config.set_value("Display", "brightness", 0.7)
+	#config.set_value("Settings", "language", "es")
+#
+	#config.save("user://scores.cfg")
 
 
 func load_game() -> void:
 	var file = FileAccess.open_encrypted_with_pass("user://inventory.data", FileAccess.READ, "1234")
-	var data = JSON.parse_string(file.get_as_text())
-	items = data
+	slots = []
+	var slot_data = JSON.parse_string(file.get_as_text())
+	for data in slot_data:
+		slots.push_back(Slot.from_dict(data))
 	inventory_changed.emit()
+	for i in max_size:
+		slot_changed.emit(i)
 	
+	
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("test"):
+		load_game()
