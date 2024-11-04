@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://6skmyivarvyc"]
+[gd_scene load_steps=30 format=4 uid="uid://6skmyivarvyc"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_7rm2a"]
 [ext_resource type="Texture2D" uid="uid://dmnqrd5gg55ux" path="res://icon.svg" id="1_8kufr"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://do58jo1gy4h6f" path="res://scenes/restart_zone.tscn" id="17_bnxk2"]
 [ext_resource type="PackedScene" uid="uid://b108gt4ixjhgl" path="res://scenes/weak_checkpoint.tscn" id="18_ga6as"]
 [ext_resource type="Resource" uid="uid://b6e4dnh4ltwxp" path="res://items/sword.tres" id="20_afl5t"]
+[ext_resource type="PackedScene" uid="uid://bnjehtrwvahie" path="res://scenes/spike.tscn" id="22_8lo5y"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w2m6y"]
 texture = ExtResource("7_uq4jv")
@@ -505,10 +506,10 @@ autoplay = true
 bus = &"Music"
 
 [node name="Enemy" parent="." instance=ExtResource("5_57nwe")]
-position = Vector2(226, 361)
+position = Vector2(571, 380)
 
 [node name="Player" parent="." instance=ExtResource("8_qgi58")]
-position = Vector2(1601, 353)
+position = Vector2(933, 270)
 
 [node name="Drone" parent="." instance=ExtResource("12_i6t6c")]
 position = Vector2(109, 93)
@@ -618,5 +619,8 @@ item = ExtResource("15_3atir")
 [node name="Pickable9" parent="." instance=ExtResource("14_isyxv")]
 position = Vector2(1832, 318)
 item = ExtResource("15_3atir")
+
+[node name="Spike" parent="." instance=ExtResource("22_8lo5y")]
+position = Vector2(1104, 426)
 
 [editable path="RigidBody2D4"]

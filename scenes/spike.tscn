@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bnjehtrwvahie"]
+
+[ext_resource type="Script" path="res://components/hitbox.gd" id="1_t3b2d"]
+[ext_resource type="Texture2D" uid="uid://bp755n2as6isu" path="res://assets/sprites/light.png" id="2_6wy04"]
+
+[node name="Spike" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_t3b2d")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -32, 66, 39, -54, 38)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(-8, -33)
+rotation = 1.5708
+texture = ExtResource("2_6wy04")

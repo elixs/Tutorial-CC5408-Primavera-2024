@@ -1,7 +1,8 @@
-[gd_scene load_steps=60 format=3 uid="uid://b8kr5tc47tw8k"]
+[gd_scene load_steps=69 format=3 uid="uid://b8kr5tc47tw8k"]
 
 [ext_resource type="Texture2D" uid="uid://xfmlf4rls8ap" path="res://assets/character/AnimationSheet_Character.png" id="1_hmi4s"]
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_qhhe5"]
+[ext_resource type="Shader" path="res://shaders/color.gdshader" id="2_v57a3"]
 [ext_resource type="Texture2D" uid="uid://dmnqrd5gg55ux" path="res://icon.svg" id="3_tgb4k"]
 [ext_resource type="Script" path="res://components/hitbox.gd" id="4_scd70"]
 [ext_resource type="Texture2D" uid="uid://bp755n2as6isu" path="res://assets/sprites/light.png" id="5_g66tu"]
@@ -9,12 +10,16 @@
 [ext_resource type="AudioStream" uid="uid://bmjhl6vbymk6t" path="res://assets/sfx/Jump 1.wav" id="7_xs6hr"]
 [ext_resource type="PackedScene" uid="uid://dajqbc4fir4jp" path="res://ui/pause_menu.tscn" id="9_g0keb"]
 [ext_resource type="PackedScene" uid="uid://botkfgw5thvmu" path="res://ui/inventory_screen.tscn" id="9_soqhy"]
+[ext_resource type="Script" path="res://components/camera_with_shake.gd" id="10_bx5ww"]
+[ext_resource type="Script" path="res://components/character_component.gd" id="11_7yrfj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j1om4"]
 radius = 25.0
 height = 96.0
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vtq5b"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7np6d"]
+shader = ExtResource("2_v57a3")
+shader_parameter/color = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8xwd4"]
 size = Vector2(53, 124)
@@ -424,7 +429,6 @@ transitions = ["hop", "jump", SubResource("AnimationNodeStateMachineTransition_5
 graph_offset = Vector2(148, -131)
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_h23r5"]
-graph_offset = Vector2(-446.971, 172.31)
 "nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_lr445")
 "nodes/Animation 3/position" = Vector2(-224, 464)
 nodes/attack/node = SubResource("AnimationNodeOneShot_w41f1")
@@ -454,6 +458,52 @@ alpha_curve = SubResource("CurveTexture_pbccs")
 hue_variation_min = -0.07
 hue_variation_max = 0.09
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ma0p"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_alr02"]
+bg_color = Color(0.402757, 0.82, 0.2378, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fcux1"]
+size = Vector2(32, 20)
+
+[sub_resource type="Animation" id="Animation_qqsi8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3uui6"]
+resource_name = "immune"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nqx8g"]
+_data = {
+"RESET": SubResource("Animation_qqsi8"),
+"immune": SubResource("Animation_3uui6")
+}
+
 [node name="Player" type="CharacterBody2D" groups=["swap"]]
 collision_layer = 3
 collision_mask = 3
@@ -466,7 +516,7 @@ shape = SubResource("CapsuleShape2D_j1om4")
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Pivot"]
-material = SubResource("CanvasItemMaterial_vtq5b")
+material = SubResource("ShaderMaterial_7np6d")
 scale = Vector2(4, 4)
 texture = ExtResource("1_hmi4s")
 hframes = 8
@@ -483,7 +533,6 @@ texture = ExtResource("3_tgb4k")
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("4_scd70")
-damage = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pivot/Hitbox"]
 position = Vector2(40.5, 0)
@@ -503,6 +552,7 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+active = false
 tree_root = SubResource("AnimationNodeBlendTree_h23r5")
 anim_player = NodePath("../AnimationPlayer")
 parameters/attack/active = false
@@ -531,11 +581,6 @@ process_callback = 0
 wait_time = 5.0
 autostart = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2(0, -150)
-process_callback = 0
-limit_bottom = 684
-
 [node name="BlinkTimer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
@@ -556,3 +601,36 @@ process_material = SubResource("ParticleProcessMaterial_isue7")
 one_shot = true
 explosiveness = 1.0
 visibility_rect = Rect2(-200, -200, 400, 400)
+
+[node name="CameraWithShake" type="Camera2D" parent="."]
+offset = Vector2(0, -150)
+script = ExtResource("10_bx5ww")
+
+[node name="CharacterComponent" type="Node" parent="."]
+script = ExtResource("11_7yrfj")
+attack = 10.0
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(150, 20)
+offset_left = -75.0
+offset_top = -87.0
+offset_right = 75.0
+offset_bottom = -67.0
+theme_override_styles/background = SubResource("StyleBoxFlat_0ma0p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_alr02")
+value = 50.0
+show_percentage = false
+
+[node name="Hurtbox2" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("5_y6v83")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox2"]
+position = Vector2(0, 54)
+shape = SubResource("RectangleShape2D_fcux1")
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_nqx8g")
+}

@@ -26,6 +26,10 @@ var running := false
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var inventory: MarginContainer = %Inventory
 @onready var death_particles: GPUParticles2D = $DeathParticles
+@onready var camera_with_shake: CameraWithShake = $CameraWithShake
+@onready var character_component: CharacterComponent = $CharacterComponent
+@onready var progress_bar: ProgressBar = $ProgressBar
+@onready var animation_player_2: AnimationPlayer = $AnimationPlayer2
 
 
 func _ready() -> void:
@@ -37,6 +41,10 @@ func _ready() -> void:
 	Game.swapped.connect(_on_swapped)
 	_on_swapped(Game.is_swapped)
 	inventory.hide()
+	
+	character_component.health_changed.connect(func(value): progress_bar.value = value)
+	progress_bar.value = character_component.health
+	progress_bar.max_value = character_component.max_health
 
 
 func _input(event: InputEvent) -> void:
@@ -65,6 +73,7 @@ func _physics_process(delta: float) -> void:
 	
 	if is_on_floor() and Input.is_action_just_pressed("attack"):
 		animation_tree["parameters/attack/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+		camera_with_shake.shake()
 	if Input.is_action_just_pressed("fire"):
 		fire()
 	
@@ -90,7 +99,7 @@ func taunt():
 
 
 func take_damage(damage: int):
-	Debug.log("oh no")
+	animation_player_2.play("immune")
 
 
 func fire() -> void:
