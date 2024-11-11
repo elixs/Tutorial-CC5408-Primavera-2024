@@ -6,6 +6,9 @@ var valid_checkpoint := false
 var last_checkpoint: Vector2
 
 
+func _ready() -> void:
+	load_config()
+
 
 var is_swapped := false :
 	set(value):
@@ -43,3 +46,20 @@ func load_game() -> void:
 	var file = FileAccess.open_encrypted_with_pass("user://game.data", FileAccess.READ, "1234")
 	var dict = JSON.parse_string(file.get_as_text())
 	load_data(dict)
+
+
+
+func load_config() -> void:
+	var config = ConfigFile.new()
+	
+	var err = config.load("user://settings.cfg")
+	if err != OK:
+		return
+	
+	var music = config.get_value("Audio", "Music")
+	var sfx = config.get_value("Audio", "SFX")
+	var fullscreen = config.get_value("Video", "Fullscreen")
+	
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear_to_db(music))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(sfx))
+	get_window().mode = Window.MODE_FULLSCREEN if fullscreen else Window.MODE_WINDOWED

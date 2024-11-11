@@ -6,7 +6,12 @@ extends Control
 @onready var credits: Button = %Credits
 @onready var quit: Button = %Quit
 @onready var continue_button: BeepButton = %Continue
-@onready var label: Label = $Label
+@onready var label: Label = %Label
+@onready var title_label: Label = %TitleLabel
+
+@onready var menu: VBoxContainer = %Menu
+@onready var settings: VBoxContainer = %Settings
+@onready var settings_button: BeepButton = %SettingsButton
 
 #var main = preload("res://scenes/main.tscn")
 
@@ -24,8 +29,11 @@ func _ready() -> void:
 	tween.parallel().tween_property(label, "scale:y", 3, 2)
 	tween.tween_property(label, "scale:y", 1, 1)
 	tween.set_loops()
-	
-	
+	menu.show()
+	settings.hide()
+	settings_button.pressed.connect(_on_settings_pressed)
+	settings.back_pressed.connect(_on_settings_back_pressed)
+	update_language()
 
 
 func _on_start_pressed() -> void:
@@ -36,6 +44,24 @@ func _on_start_pressed() -> void:
 func _on_credits_pressed() -> void:
 	LevelManager.go_to_credits()
 
+
 func _on_continue_pressed() -> void:
 	Game.load_game()
 	_on_start_pressed()
+
+
+func _on_settings_pressed() -> void:
+	menu.hide()
+	settings.show()
+	label.hide()
+
+
+func _on_settings_back_pressed() -> void:
+	menu.show()
+	settings.hide()
+	label.show()
+
+
+func update_language() -> void:
+	label.text = tr("MAIN_LABEL")
+	title_label.text = tr("MAIN_TITLE")

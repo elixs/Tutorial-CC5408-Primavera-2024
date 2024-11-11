@@ -6,6 +6,7 @@ extends Node
 func play_beep() -> void:
 	var audio_stream_player = AudioStreamPlayer.new()
 	audio_stream_player.stream = beep
+	audio_stream_player.bus = "SFX"
 	add_child(audio_stream_player)
 	audio_stream_player.play()
 	await audio_stream_player.finished

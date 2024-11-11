@@ -500,8 +500,8 @@ position = Vector2(-1401, -85)
 modulate = Color(1, 0, 0, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 stream = ExtResource("6_1jukx")
-volume_db = -8.49
 autoplay = true
 bus = &"Music"
 
@@ -509,7 +509,7 @@ bus = &"Music"
 position = Vector2(571, 380)
 
 [node name="Player" parent="." instance=ExtResource("8_qgi58")]
-position = Vector2(933, 270)
+position = Vector2(1712, 358)
 
 [node name="Drone" parent="." instance=ExtResource("12_i6t6c")]
 position = Vector2(109, 93)

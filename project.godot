@@ -103,6 +103,11 @@ inventory={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://assets/tutorial.en.translation", "res://assets/tutorial.es.translation")
+locale/test="es"
+
 [layer_names]
 
 2d_physics/layer_1="world"

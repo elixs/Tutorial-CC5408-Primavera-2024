@@ -598,6 +598,7 @@ visibility_rect = Rect2(-200, -200, 400, 400)
 
 [node name="CameraWithShake" type="Camera2D" parent="."]
 offset = Vector2(0, -150)
+limit_bottom = 700
 script = ExtResource("10_bx5ww")
 
 [node name="CharacterComponent" type="Node" parent="."]

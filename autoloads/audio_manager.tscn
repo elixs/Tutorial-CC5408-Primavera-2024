@@ -6,3 +6,5 @@
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_0pndn")
 beep = ExtResource("2_sye05")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

@@ -6,6 +6,9 @@ extends CanvasLayer
 @onready var quit: Button = %Quit
 @onready var save_button: BeepButton = %Save
 @onready var load_button: BeepButton = %Load
+@onready var settings_button: BeepButton = %SettingsButton
+@onready var pause: VBoxContainer = %Pause
+@onready var settings: VBoxContainer = %Settings
 
 
 func _ready() -> void:
@@ -15,12 +18,18 @@ func _ready() -> void:
 	quit.pressed.connect(get_tree().quit)
 	save_button.pressed.connect(_on_save_pressed)
 	load_button.pressed.connect(_on_load_pressed)
+	settings_button.pressed.connect(_on_settings_pressed)
+	settings.back_pressed.connect(_on_settings_back_pressed)
+	pause.show()
+	settings.hide()
 	hide()
-	
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("menu"):
+		if not visible:
+			pause.show()
+			settings.hide()
 		visible = not visible
 		get_tree().paused = visible
 
@@ -48,3 +57,11 @@ func _on_save_pressed() -> void:
 func _on_load_pressed() -> void:
 	InventoryManager.load_game()
 	
+
+func _on_settings_pressed() -> void:
+	pause.hide()
+	settings.show()
+
+func _on_settings_back_pressed() -> void:
+	pause.show()
+	settings.hide()
