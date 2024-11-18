@@ -10,8 +10,10 @@ extends CharacterBody2D
 @export var attacking = false
 @export var ball_scene: PackedScene
 @export var jump_stream: AudioStream
+@export var quests: Array[Quest]
 
 var running := false
+var flowers := 6
 
 @onready var sprite_2d: Sprite2D = $Pivot/Sprite2D
 @onready var animation_tree: AnimationTree = $AnimationTree
@@ -50,6 +52,9 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("inventory"):
 		inventory.visible = not inventory.visible
+	if event.is_action_pressed("test"):
+		if not quests.is_empty():
+			quests[0].run(self)
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():

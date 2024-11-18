@@ -1,0 +1,92 @@
+{
+"@path": "res://addons/dialogic/Resources/character.gd",
+"@subpath": NodePath(""),
+"_translation_id": "",
+"color": Color(1, 1, 1, 1),
+"custom_info": {
+"sound_mood_default": "",
+"sound_moods": {},
+"style": ""
+},
+"default_portrait": "1",
+"description": "",
+"display_name": "roberto",
+"mirror": false,
+"nicknames": [""],
+"offset": Vector2(0, 0),
+"portraits": {
+"1": {
+"export_overrides": {
+"image": "\"res://assets/character/jump/jump_01.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"2": {
+"export_overrides": {
+"image": "\"res://assets/character/jump/jump_02.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"3": {
+"export_overrides": {
+"image": "\"res://assets/character/jump/jump_03.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"4": {
+"export_overrides": {
+"image": "\"res://assets/character/jump/jump_04.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"5": {
+"export_overrides": {
+"image": "\"res://assets/character/jump/jump_05.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"6": {
+"export_overrides": {
+"image": "\"res://assets/character/jump/jump_06.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"7": {
+"export_overrides": {
+"image": "\"res://assets/character/jump/jump_07.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+},
+"8": {
+"export_overrides": {
+"image": "\"res://assets/character/jump/jump_08.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": ""
+}
+},
+"scale": 1.0
+}

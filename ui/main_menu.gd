@@ -8,6 +8,8 @@ extends Control
 @onready var continue_button: BeepButton = %Continue
 @onready var label: Label = %Label
 @onready var title_label: Label = %TitleLabel
+@onready var levels: BeepButton = %Levels
+
 
 @onready var menu: VBoxContainer = %Menu
 @onready var settings: VBoxContainer = %Settings
@@ -34,6 +36,7 @@ func _ready() -> void:
 	settings_button.pressed.connect(_on_settings_pressed)
 	settings.back_pressed.connect(_on_settings_back_pressed)
 	update_language()
+	levels.pressed.connect(func(): get_tree().change_scene_to_file("res://ui/levels_menu.tscn"))
 
 
 func _on_start_pressed() -> void:
